@@ -80,7 +80,35 @@ def prop_FC(csp, newVar=None):
     '''Do forward checking. That is check constraints with 
        only one uninstantiated variable. Remember to keep 
        track of all pruned variable,value pairs and return '''
-#IMPLEMENT
+    #IMPLEMENT
+    '''
+    If all variables are assigned, return or exit
+    V = pick an unassigned variable
+    Assigned[V} = True
+    for d := each member of CurDom(V)
+        Value of V = d
+        DWO_occurred = False
+        for each constraint C over V such that
+                a) C has only one unassigned variable X in its scope
+            if (FCCheck(C,X) = DWO)
+                DWO_occurred = True
+                break -- stop checking constraint
+        if (not DWO_occurred) -- all constraints were ok
+            FC(Level+1)
+        RestoreAllValuesPrunedByFCCheck()
+    Assigned[V} = False
+    '''
+    #bool is true iff a dead-end is found
+    bool = True
+    #list is list of (Variable, value) tuples that have been pruned
+    list = []
+    if newVar is None:
+        #we look for unary constraints of the csp (constraints whose scope
+        #contains only one variable) and we forward_check these constraints.
+        constraints = csp.get_all_cons()
+    else:
+        constraints = csp.get_cons_with_var(newVar)
+
 
 def prop_GAC(csp, newVar=None):
     '''Do GAC propagation. If newVar is None we do initial GAC enforce 
