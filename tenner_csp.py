@@ -7,6 +7,7 @@ Construct and return Tenner Grid CSP models.
 
 from cspbase import *
 import itertools
+import time
 import numpy as np
 
 def tenner_csp_model_1(initial_tenner_board):
@@ -298,12 +299,25 @@ def tenner_csp_model_2(initial_tenner_board):
 def row_all_diff_cons(row_list):
     dom_list = []
     sat_tuples = []
+    blacklist_dom = []
     for var in row_list:
-        dom_list.append(var.domain())
+        temp_dom = var.domain()
+        if len(temp_dom) == 1:
+            blacklist_dom += temp_dom
+
+    for var in row_list:
+        temp_dom = var.domain()
+
+        if len(temp_dom) == 1:
+            dom_list.append(temp_dom)
+        else:
+            temp_dom = [val for val in temp_dom if val not in blacklist_dom]
+            dom_list.append(temp_dom)
 
     for t in itertools.product(*dom_list):
-        if check_has_digits(t):
+        if len(set(t)) == 10:
             sat_tuples.append(t)
+
     return sat_tuples
 
 """
@@ -332,4 +346,18 @@ b2 = ([[6, -1, 1, 5, 7, -1, -1, -1, 3, -1],
       [21, 26, 21, 21, 29, 10, 28, 26, 21, 22])
 
 if __name__ == "__main__":
+    start_time = time.time()
+    tenner_csp_model_1(b1)
+    print("--- %s seconds for model1 b1 ---" % (time.time() - start_time))
+
+    start_time = time.time()
+    tenner_csp_model_1(b2)
+    print("--- %s seconds for model1 b2 ---" % (time.time() - start_time))
+
+    start_time = time.time()
     tenner_csp_model_2(b1)
+    print("--- %s seconds for model2 b1 ---" % (time.time() - start_time))
+
+    start_time = time.time()
+    tenner_csp_model_2(b2)
+    print("--- %s seconds for model2 b2 ---" % (time.time() - start_time))

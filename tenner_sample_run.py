@@ -26,7 +26,6 @@ if __name__ == "__main__":
         print("Solving board:")
         for row in b[0]:
             print(row)
-        """
         print("Using Model 1")
         csp, var_array = tenner_csp_model_1(b)
         solver = BT(csp)
@@ -35,7 +34,6 @@ if __name__ == "__main__":
         solver.bt_search(prop_FC)
         print("Solution")
         print_tenner_soln(var_array)
-        """
         print("Using Model 2")
         csp, var_array = tenner_csp_model_2(b)
         solver = BT(csp)
