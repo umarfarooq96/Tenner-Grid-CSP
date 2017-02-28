@@ -250,8 +250,7 @@ def tenner_csp_model_2(initial_tenner_board):
        variables.
     '''
     """
-    just one change?
-    for the row, we have ten variables which should have all the digits from 0-9.
+    for the row, we have all-different constraint for variables in each row
     """
     #IMPLEMENT
     board = initial_tenner_board[0]
@@ -319,17 +318,6 @@ def row_all_diff_cons(row_list):
             sat_tuples.append(t)
 
     return sat_tuples
-
-"""
-WRITE OWN FUNCTION THAT MAKES PERMUTATIONS OF
-[-1, 0, 1, -1, 9, -1, -1, 5, -1, 2]
-only replacing the -1's
-"""
-
-all_digs = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-
-def check_has_digits(lst):
-    return len(set(lst)) == len(all_digs)
 
 b1 = ([[-1, 0, 1,-1, 9,-1,-1, 5,-1, 2],
        [-1, 7,-1,-1,-1, 6, 1,-1,-1,-1],

@@ -20,26 +20,44 @@ def print_tenner_soln(var_array):
     for row in var_array:
         print([var.get_assigned_value() for var in row])
 
+# if __name__ == "__main__":
+#
+#     for b in [b1, b2]:
+#         print("Solving board:")
+#         for row in b[0]:
+#             print(row)
+#         print("Using Model 1")
+#         csp, var_array = tenner_csp_model_1(b)
+#         solver = BT(csp)
+#         print("=======================================================")
+#         print("FC")
+#         solver.bt_search(prop_FC)
+#         print("Solution")
+#         print_tenner_soln(var_array)
+#         print("Using Model 2")
+#         csp, var_array = tenner_csp_model_2(b)
+#         solver = BT(csp)
+#         print("=======================================================")
+#         print("GAC")
+#         solver.bt_search(prop_GAC)
+#         print("Solution")
+#         print_tenner_soln(var_array)
+
 if __name__ == "__main__":
 
     for b in [b1, b2]:
-        print("Solving board:")
-        for row in b[0]:
-            print(row)
-        print("Using Model 1")
+        start_time = time.time()
         csp, var_array = tenner_csp_model_1(b)
         solver = BT(csp)
-        print("=======================================================")
-        print("FC")
         solver.bt_search(prop_FC)
-        print("Solution")
         print_tenner_soln(var_array)
-        print("Using Model 2")
+        print("--- %s seconds for model1 ---" % (time.time() - start_time))
+
+        start_time = time.time()
         csp, var_array = tenner_csp_model_2(b)
         solver = BT(csp)
-        print("=======================================================")
-        print("GAC")
         solver.bt_search(prop_GAC)
-        print("Solution")
         print_tenner_soln(var_array)
+        print("--- %s seconds for model2 ---" % (time.time() - start_time))
+
 
