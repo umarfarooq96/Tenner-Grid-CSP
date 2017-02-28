@@ -47,6 +47,7 @@ btracker.bt_search(prop_BT)
 print("=======================================================")
 print("Forward Checking on simple CSP")
 btracker.bt_search(prop_FC)
+
 print("=======================================================")
 print("GAC on simple CSP")
 btracker.bt_search(prop_GAC)
